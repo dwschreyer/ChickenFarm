@@ -3,7 +3,15 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.27428.2043
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChickenFarm", "ChickenFarm\ChickenFarm.csproj", "{A398FB4B-1BE1-4AAC-928C-EEA22C4B8100}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ChickenFarm", "ChickenFarm\ChickenFarm.csproj", "{A398FB4B-1BE1-4AAC-928C-EEA22C4B8100}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChickenFarm.SiloHostConsole", "ChickenFarm.SiloHostConsole\ChickenFarm.SiloHostConsole.csproj", "{E1025C74-B248-441D-957E-99C0DCFEAC06}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChickenFarm.ClientConsole", "ChickenFarm.ClientConsole\ChickenFarm.ClientConsole.csproj", "{5E592FC4-A4A3-4057-805B-E12167FB3D5B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChickenFarm.Grains", "ChickenFarm.Grains\ChickenFarm.Grains.csproj", "{B6C9C36E-4D93-4281-9B95-D3514BAC41B5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChickenFarm.GrainContracts", "ChickenFarm.GrainContracts\ChickenFarm.GrainContracts.csproj", "{0122C5DC-C821-4FCA-8AD3-A2639B7C122F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +23,22 @@ Global
 		{A398FB4B-1BE1-4AAC-928C-EEA22C4B8100}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A398FB4B-1BE1-4AAC-928C-EEA22C4B8100}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A398FB4B-1BE1-4AAC-928C-EEA22C4B8100}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E1025C74-B248-441D-957E-99C0DCFEAC06}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E1025C74-B248-441D-957E-99C0DCFEAC06}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E1025C74-B248-441D-957E-99C0DCFEAC06}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E1025C74-B248-441D-957E-99C0DCFEAC06}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5E592FC4-A4A3-4057-805B-E12167FB3D5B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5E592FC4-A4A3-4057-805B-E12167FB3D5B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5E592FC4-A4A3-4057-805B-E12167FB3D5B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5E592FC4-A4A3-4057-805B-E12167FB3D5B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B6C9C36E-4D93-4281-9B95-D3514BAC41B5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B6C9C36E-4D93-4281-9B95-D3514BAC41B5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B6C9C36E-4D93-4281-9B95-D3514BAC41B5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B6C9C36E-4D93-4281-9B95-D3514BAC41B5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0122C5DC-C821-4FCA-8AD3-A2639B7C122F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0122C5DC-C821-4FCA-8AD3-A2639B7C122F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0122C5DC-C821-4FCA-8AD3-A2639B7C122F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0122C5DC-C821-4FCA-8AD3-A2639B7C122F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
