@@ -11,14 +11,14 @@ namespace ChickenFarm.Grains
     {
         public string Name { get; set; }
 
-        public async Task InitialiseFarm()
+        public Task Initialise()
         {
             var rnd = new Random();
             var houseDict = new Dictionary<Guid, int>();
-            var houseCount = rnd.Next(1, 10);
+            var houseCount = rnd.Next(1, 2);
             for (int i = 0; i < houseCount; i++)
             {
-                houseDict.Add(Guid.NewGuid(), rnd.Next(1000, 30000));
+                houseDict.Add(Guid.NewGuid(), rnd.Next(1, 30));
             };
 
             Console.WriteLine($"Farm {this.GetGrainIdentity()} with {houseDict.Count} chicken houses!");
@@ -26,8 +26,10 @@ namespace ChickenFarm.Grains
             foreach (var item in houseDict)
             {
                 var chickenHouse = GrainFactory.GetGrain<IChickenHouse>(item.Key);
-                await chickenHouse.Initialise(item.Value);
+                chickenHouse.Initialise(this, item.Value);
             }
+
+            return Task.CompletedTask;
         }
     }
 }

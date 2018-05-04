@@ -23,7 +23,7 @@ namespace ChickenFarm.ClientConsole
             {
                 using (var client = await StartClientWithRetries())
                 {
-                    await SpawnFarms(client, 20);
+                    await SpawnFarms(client, 1);
                     Console.ReadKey();
                 }
 
@@ -54,6 +54,7 @@ namespace ChickenFarm.ClientConsole
                         })
                         .ConfigureApplicationParts(parts => parts.AddApplicationPart(typeof(IFarm).Assembly).WithReferences())
                         .ConfigureApplicationParts(parts => parts.AddApplicationPart(typeof(IChickenHouse).Assembly).WithReferences())
+                        .ConfigureApplicationParts(parts => parts.AddApplicationPart(typeof(IChicken).Assembly).WithReferences())
                         .ConfigureLogging(logging => logging.AddConsole())
                         .Build();
 
@@ -92,7 +93,7 @@ namespace ChickenFarm.ClientConsole
         private static Task SpawnFarm(IClusterClient client, Guid farmId)
         {
             var farm = client.GetGrain<IFarm>(farmId);
-            return farm.InitialiseFarm();
+            return farm.Initialise();
         }
     }
 }

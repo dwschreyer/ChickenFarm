@@ -8,6 +8,6 @@ namespace ChickenFarm.GrainContracts
 {
     public interface IFarm : IGrainWithGuidKey
     {
-        Task InitialiseFarm();
+        Task Initialise();
     }
 }
