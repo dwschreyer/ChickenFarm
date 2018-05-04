@@ -13,10 +13,12 @@ namespace ChickenFarm.Grains
 
         public async Task InitialiseFarm()
         {
-            var houseDict = new Dictionary<Guid, int>()
+            var rnd = new Random();
+            var houseDict = new Dictionary<Guid, int>();
+            var houseCount = rnd.Next(1, 10);
+            for (int i = 0; i < houseCount; i++)
             {
-                {  Guid.NewGuid(), 1000 },
-                {  Guid.NewGuid(), 30000 }
+                houseDict.Add(Guid.NewGuid(), rnd.Next(1000, 30000));
             };
 
             Console.WriteLine($"Farm {this.GetGrainIdentity()} with {houseDict.Count} chicken houses!");
