@@ -20,15 +20,15 @@ namespace ChickenFarm.SiloHostConsole.Seed
 
         public async Task Initialise()
         {
-            await SpawnFarms(1);
+            await SpawnFarms(50);
         }
 
         private async Task SpawnFarms(int farmCount)
         {
             var tasks = new List<Task>();
 
-            var testFarmId = new Guid("3A55870F-3DBC-4D2F-B1DC-160E2D964DFB");
-            var farm = _grainFactory.GetGrain<IFarm>(testFarmId);
+            var farmId = new Guid("3A55870F-3DBC-4D2F-B1DC-160E2D964DFB");
+            var farm = _grainFactory.GetGrain<IFarm>(farmId);
             await farm.Initialise("Darrel's Farm");
 
             for (int i = 0; i < farmCount; i++)
@@ -38,7 +38,9 @@ namespace ChickenFarm.SiloHostConsole.Seed
                 await farm.Initialise(farmId.ToString());
             }
 
-            //Task.WaitAll(tasks.ToArray());
+            
+            
+
 
             await Task.CompletedTask;
         }

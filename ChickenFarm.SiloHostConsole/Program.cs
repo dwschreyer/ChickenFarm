@@ -47,6 +47,7 @@ namespace ChickenFarm.SiloHostConsole
             // define the cluster configuration
             var builder = new SiloHostBuilder()
                 .UseLocalhostClustering()
+                .AddMemoryGrainStorage("DevStore")
                 .Configure<ClusterOptions>(options =>
                 {
                     options.ClusterId = "dev";

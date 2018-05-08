@@ -14,21 +14,21 @@ namespace ChickenFarm.Grains
         public Task Initialise(string name)
         {
             Name = name;
-            var rnd = new Random();
-            var houseDict = new Dictionary<Guid, int>();
-            var houseCount = rnd.Next(1, 2);
-            for (int i = 0; i < houseCount; i++)
-            {
-                houseDict.Add(Guid.NewGuid(), rnd.Next(1, 30));
-            };
+            //var rnd = new Random();
+            //var houseDict = new Dictionary<Guid, int>();
+            //var houseCount = rnd.Next(1, 2);
+            //for (int i = 0; i < houseCount; i++)
+            //{
+            //    houseDict.Add(Guid.NewGuid(), rnd.Next(1, 30));
+            //};
 
-            Console.WriteLine($"Farm {this.GetGrainIdentity()} with {houseDict.Count} chicken houses!");
+            //Console.WriteLine($"Farm {this.GetGrainIdentity()} with {houseDict.Count} chicken houses!");
 
-            foreach (var item in houseDict)
-            {
-                var chickenHouse = GrainFactory.GetGrain<IChickenHouse>(item.Key);
-                chickenHouse.Initialise(this, item.Value);
-            }
+            //foreach (var item in houseDict)
+            //{
+            //    var chickenHouse = GrainFactory.GetGrain<IChickenHouse>(item.Key);
+            //    chickenHouse.Initialise(this, item.Value);
+            //}
 
             return Task.CompletedTask;
         }
