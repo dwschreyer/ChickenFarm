@@ -23,7 +23,13 @@ namespace ChickenFarm.ClientConsole
             {
                 using (var client = await StartClientWithRetries())
                 {
-                    await SpawnFarms(client, 1);
+                    var farmId = new Guid("3A55870F-3DBC-4D2F-B1DC-160E2D964DFB");
+                    var farm = client.GetGrain<IFarm>(farmId);
+                    
+
+                    var name = await farm.GetName();
+                    Console.WriteLine($"{Environment.NewLine}{new string('=', 80)}{Environment.NewLine}Found Farm: {name}");
+                    
                     Console.ReadKey();
                 }
 
@@ -75,25 +81,6 @@ namespace ChickenFarm.ClientConsole
             }
 
             return client;
-        }
-
-        private static async Task SpawnFarms(IClusterClient client, int farmCount)
-        {
-            var tasks = new List<Task>();
-            for (int i = 0; i < farmCount; i++)
-            {
-                tasks.Add(SpawnFarm(client, Guid.NewGuid()));
-            }
-
-            Task.WaitAll(tasks.ToArray());
-
-            await Task.CompletedTask;
-        }
-
-        private static Task SpawnFarm(IClusterClient client, Guid farmId)
-        {
-            var farm = client.GetGrain<IFarm>(farmId);
-            return farm.Initialise();
         }
     }
 }

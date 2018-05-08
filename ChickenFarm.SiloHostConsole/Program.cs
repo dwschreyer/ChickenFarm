@@ -1,10 +1,13 @@
 ﻿using ChickenFarm.Grains;
+using ChickenFarm.SiloHostConsole.Seed;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Orleans;
 using Orleans.Configuration;
 using Orleans.Hosting;
 using System;
 using System.Net;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace ChickenFarm.SiloHostConsole
@@ -22,6 +25,9 @@ namespace ChickenFarm.SiloHostConsole
             {
                 var host = await StartSilo();
                 Console.WriteLine($"=============================================================={Environment.NewLine}Chicken Farm Silo Hosted!{Environment.NewLine}==============================================================");
+
+                
+                Console.WriteLine($"=============================================================={Environment.NewLine}Chicken Farm Seed Completed!{Environment.NewLine}==============================================================");
 
                 Console.ReadLine();
 
@@ -45,6 +51,12 @@ namespace ChickenFarm.SiloHostConsole
                 {
                     options.ClusterId = "dev";
                     options.ServiceId = "ChickenFarm";
+                })
+                .AddStartupTask(async (IServiceProvider services, CancellationToken cancellationToken) =>
+                {
+                    var grainFactory = services.GetRequiredService<IGrainFactory>();
+                    var seedData = new SeedData(grainFactory);
+                    await seedData.Initialise();
                 })
                 .Configure<EndpointOptions>(options => options.AdvertisedIPAddress = IPAddress.Loopback)
                 .ConfigureApplicationParts(parts => parts.AddApplicationPart(typeof(Farm).Assembly).WithReferences())

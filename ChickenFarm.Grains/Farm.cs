@@ -11,8 +11,9 @@ namespace ChickenFarm.Grains
     {
         public string Name { get; set; }
 
-        public Task Initialise()
+        public Task Initialise(string name)
         {
+            Name = name;
             var rnd = new Random();
             var houseDict = new Dictionary<Guid, int>();
             var houseCount = rnd.Next(1, 2);
@@ -30,6 +31,11 @@ namespace ChickenFarm.Grains
             }
 
             return Task.CompletedTask;
+        }
+
+        public Task<string> GetName()
+        {
+            return Task.FromResult(Name);
         }
     }
 }
