@@ -31,9 +31,11 @@ namespace ChickenFarm.SiloHostConsole.Seed
             var farm = _grainFactory.GetGrain<IFarm>(farmId);
             await farm.Initialise("Darrel's Farm");
 
+            var chickenHouseId = new Guid("");
+
             for (int i = 0; i < farmCount; i++)
             {
-                var farmId = Guid.NewGuid();
+                farmId = Guid.NewGuid();
                 farm = _grainFactory.GetGrain<IFarm>(farmId);
                 await farm.Initialise(farmId.ToString());
             }
