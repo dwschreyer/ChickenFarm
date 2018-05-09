@@ -1,0 +1,34 @@
+{
+  "farms": [
+    {
+      "id": "CE038601-FCDD-4ACD-BEAF-E7CCADD9FE5B",
+      "name": "Fred's Farm"
+    },
+    {
+      "id": "814A6904-FCCE-45EE-9A08-BBA220125D12",
+      "name": "Mary's Farm"
+    }
+  ],
+  "houses": [
+    {
+      "id": "7809DCBB-3703-431C-BE35-81C206133577",
+      "name": "FH-A001",
+      "parentId": "CE038601-FCDD-4ACD-BEAF-E7CCADD9FE5B"
+    },
+    {
+      "id": "82F369C2-CD0A-48DA-B6A4-0BD5E2DFD523",
+      "name": "FH-A002",
+      "parentId": "CE038601-FCDD-4ACD-BEAF-E7CCADD9FE5B"
+    },
+    {
+      "id": "812C1ABD-814B-42DD-88EF-4FC7B1B4DE1B",
+      "name": "FH-B001",
+      "parentId": "814A6904-FCCE-45EE-9A08-BBA220125D12"
+    },
+    {
+      "id": "696B4BEF-D6D7-4850-BD0F-464AD5C30C2D",
+      "name": "FH-B002",
+      "parentId": "814A6904-FCCE-45EE-9A08-BBA220125D12"
+    }
+  ]
+}

@@ -25,11 +25,15 @@ namespace ChickenFarm.ClientConsole
                 {
                     var farmId = new Guid("3A55870F-3DBC-4D2F-B1DC-160E2D964DFB");
                     var farm = client.GetGrain<IFarm>(farmId);
-                    
+
+                    var chickenHouseId = new Guid("DD673B1B-A189-4EA6-B03D-FCC26B9C724D");
+                    var chickenHouse = client.GetGrain<IChickenHouse>(chickenHouseId);
 
                     var name = await farm.GetName();
                     Console.WriteLine($"{Environment.NewLine}{new string('=', 80)}{Environment.NewLine}Found Farm: {name}");
-                    
+
+                    await LoopThroughGrains(client);
+
                     Console.ReadKey();
                 }
 
@@ -40,6 +44,22 @@ namespace ChickenFarm.ClientConsole
                 Console.WriteLine(e);
                 Console.ReadKey();
                 return 1;
+            }
+        }
+
+        private static async Task LoopThroughGrains(IClusterClient client)
+        {
+            var rnd = new Random();
+            var sw = new Stopwatch();
+            for (int i = 0; i < 100; i++)
+            {
+                sw.Restart();
+                var farmId = new Guid("3A55870F-3DBC-4D2F-B1DC-160E2D964DFB");
+                var farm = client.GetGrain<IFarm>(farmId);
+                var name = await farm.GetName();
+                sw.Stop();
+                Console.WriteLine($"{name} in {sw.ElapsedMilliseconds}ms!");
+                await Task.Delay(rnd.Next(5, 50));
             }
         }
 

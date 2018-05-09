@@ -1,4 +1,5 @@
-﻿using ChickenFarm.Grains;
+﻿using ChickenFarm.GrainContracts;
+using ChickenFarm.Grains;
 using ChickenFarm.SiloHostConsole.Seed;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
@@ -6,7 +7,9 @@ using Orleans;
 using Orleans.Configuration;
 using Orleans.Hosting;
 using System;
+using System.IO;
 using System.Net;
+using System.Reflection;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -23,15 +26,18 @@ namespace ChickenFarm.SiloHostConsole
         {
             try
             {
-                var host = await StartSilo();
-                Console.WriteLine($"=============================================================={Environment.NewLine}Chicken Farm Silo Hosted!{Environment.NewLine}==============================================================");
+                var silo = CreateSilo();
+                var client = CreateClient();
+                var dataFilePath = GetDataFilePath();
 
-                
-                Console.WriteLine($"=============================================================={Environment.NewLine}Chicken Farm Seed Completed!{Environment.NewLine}==============================================================");
+                await RunAsync(silo, client, dataFilePath);
+
+                Console.WriteLine("Ready to roll!");
 
                 Console.ReadLine();
-
-                await host.StopAsync();
+                
+                await client.Close();
+                await silo.StopAsync();
 
                 return 0;
             }
@@ -42,32 +48,55 @@ namespace ChickenFarm.SiloHostConsole
             }
         }
 
-        private static async Task<ISiloHost> StartSilo()
+        private static async Task RunAsync(ISiloHost silo, IClusterClient client, string dataFilePath)
         {
-            // define the cluster configuration
-            var builder = new SiloHostBuilder()
+            await silo.StartAsync();
+            await client.Connect();
+
+            var seedData = new SeedData(client, dataFilePath);
+            await seedData.Initialise();
+        }
+
+        private static string GetDataFilePath()
+        {
+            var locationPath = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
+            string dataFilePath = Path.Combine(locationPath, "Data", "FarmData.json");
+            return dataFilePath;
+        }
+
+        private static ISiloHost CreateSilo()
+        {
+            var silo = new SiloHostBuilder()
                 .UseLocalhostClustering()
-                .AddMemoryGrainStorage("DevStore")
+                .AddMemoryGrainStorage("ChickenFarmStorage")
                 .Configure<ClusterOptions>(options =>
                 {
                     options.ClusterId = "dev";
-                    options.ServiceId = "ChickenFarm";
-                })
-                .AddStartupTask(async (IServiceProvider services, CancellationToken cancellationToken) =>
-                {
-                    var grainFactory = services.GetRequiredService<IGrainFactory>();
-                    var seedData = new SeedData(grainFactory);
-                    await seedData.Initialise();
+                    options.ServiceId = "ChickenFarmApp";
                 })
                 .Configure<EndpointOptions>(options => options.AdvertisedIPAddress = IPAddress.Loopback)
                 .ConfigureApplicationParts(parts => parts.AddApplicationPart(typeof(Farm).Assembly).WithReferences())
-                .ConfigureApplicationParts(parts => parts.AddApplicationPart(typeof(ChickenHouse).Assembly).WithReferences())
-                .ConfigureApplicationParts(parts => parts.AddApplicationPart(typeof(Chicken).Assembly).WithReferences())
-                .ConfigureLogging(logging => logging.AddConsole());
+                .ConfigureLogging(logging => logging.AddConsole())
+                .Build();
 
-            var host = builder.Build();
-            await host.StartAsync();
-            return host;
+            return silo;
         }
+
+        private static IClusterClient CreateClient()
+        {
+            var client = new ClientBuilder()
+                .UseLocalhostClustering()
+                .Configure<ClusterOptions>(options =>
+                {
+                    options.ClusterId = "dev";
+                    options.ServiceId = "ChickenFarmApp";
+                })
+                .ConfigureApplicationParts(parts => parts.AddApplicationPart(typeof(IFarm).Assembly).WithReferences())
+                .ConfigureLogging(logging => logging.AddConsole())
+                .Build();
+
+            return client;
+        }
+        
     }
 }

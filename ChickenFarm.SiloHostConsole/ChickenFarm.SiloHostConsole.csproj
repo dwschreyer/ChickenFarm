@@ -14,4 +14,10 @@
     <ProjectReference Include="..\ChickenFarm\ChickenFarm.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Update="Data\FarmData.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
 </Project>

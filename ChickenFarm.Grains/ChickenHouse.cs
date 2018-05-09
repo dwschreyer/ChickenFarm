@@ -37,6 +37,5 @@ namespace ChickenFarm.Grains
 
             return Task.CompletedTask;
         }
-        
     }
 }

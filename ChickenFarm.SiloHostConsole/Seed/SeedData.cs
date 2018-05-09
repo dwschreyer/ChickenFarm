@@ -1,8 +1,10 @@
 ﻿using ChickenFarm.GrainContracts;
+using Newtonsoft.Json;
 using Orleans;
 using Orleans.Hosting;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -10,45 +12,42 @@ namespace ChickenFarm.SiloHostConsole.Seed
 {
     internal class SeedData
     {
-        private IGrainFactory _grainFactory;
+        private IClusterClient _client;
+        private string _seedDataPath;
+        private FarmData _farmData;
 
-        public SeedData(IGrainFactory grainFactory)
+        public SeedData(IClusterClient client, string seedDataPath)
         {
-
-            _grainFactory = grainFactory;
+            _client = client;
+            _seedDataPath = seedDataPath;
         }
 
         public async Task Initialise()
         {
-            await SpawnFarms(50);
-        }
-
-        private async Task SpawnFarms(int farmCount)
-        {
-            var tasks = new List<Task>();
-
-            var farmId = new Guid("3A55870F-3DBC-4D2F-B1DC-160E2D964DFB");
-            var farm = _grainFactory.GetGrain<IFarm>(farmId);
-            await farm.Initialise("Darrel's Farm");
-
-            for (int i = 0; i < farmCount; i++)
+            using (var jsonStream = new JsonTextReader(File.OpenText(_seedDataPath)))
             {
-                var farmId = Guid.NewGuid();
-                farm = _grainFactory.GetGrain<IFarm>(farmId);
-                await farm.Initialise(farmId.ToString());
+                var deserializer = new JsonSerializer();
+                _farmData = deserializer.Deserialize<FarmData>(jsonStream);
             }
 
-            
-            
-
-
-            await Task.CompletedTask;
+            await SpawnFarms();
         }
 
-        private Task SpawnFarm(Guid farmId, string name)
+        private async Task SpawnFarms()
         {
-            var farm = _grainFactory.GetGrain<IFarm>(farmId);
-            return farm.Initialise(name);
+
+            foreach (var farmInfo in _farmData.Farms)
+            {
+                var farm = _client.GetGrain<IFarm>(farmInfo.Id);
+                
+            }
+
+            for (int i = 0; i < 10000; i++)
+            {
+                var farm = _client.GetGrain<IFarm>(Guid.NewGuid());
+            }
+
+            await Task.CompletedTask;
         }
     }
 }
