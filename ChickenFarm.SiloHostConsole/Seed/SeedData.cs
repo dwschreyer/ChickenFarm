@@ -4,6 +4,7 @@ using Orleans;
 using Orleans.Hosting;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Text;
 using System.Threading.Tasks;
@@ -31,21 +32,38 @@ namespace ChickenFarm.SiloHostConsole.Seed
             }
 
             await SpawnFarms();
+
+            Console.WriteLine("Seed Data Completed");
         }
 
         private async Task SpawnFarms()
         {
+            var sw = new Stopwatch();
+            sw.Start();
+            var farmList = _client.GetGrain<IFarmList>(Guid.Empty);
+            var list = await farmList.GetList();
+            var startFarmIds = list.Count;
 
             foreach (var farmInfo in _farmData.Farms)
             {
                 var farm = _client.GetGrain<IFarm>(farmInfo.Id);
-                
+                await farm.Initialise(farmInfo.Name);
+                await farmList.AddFarmId(farmInfo.Id);
             }
 
-            for (int i = 0; i < 10000; i++)
+            for (int i = 0; i < 1000; i++)
             {
-                var farm = _client.GetGrain<IFarm>(Guid.NewGuid());
+                var farmId = Guid.NewGuid();
+                var farm = _client.GetGrain<IFarm>(farmId);
+                await farm.Initialise($"F {farmId}");
+                await farmList.AddFarmId(farmId);
             }
+
+            list = await farmList.GetList();
+            var endFarmIds = list.Count;
+
+            sw.Stop();
+            Console.WriteLine($"Farms spawned in {sw.ElapsedMilliseconds}ms.");
 
             await Task.CompletedTask;
         }
