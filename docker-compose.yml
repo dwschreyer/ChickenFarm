@@ -1,0 +1,15 @@
+version: '3.4'
+
+services:
+  chickenfarm.silohostconsole:
+    image: ${DOCKER_REGISTRY}chickenfarmsilohostconsole
+    build:
+      context: .
+      dockerfile: ChickenFarm.SiloHostConsole/Dockerfile
+
+  chickenfarm.api.publicapi:
+    image: ${DOCKER_REGISTRY}chickenfarmapipublicapi
+    build:
+      context: .
+      dockerfile: ChickenFarm.Api.PublicApi/Dockerfile
+

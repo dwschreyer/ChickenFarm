@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ChickenFarm.GrainContracts
 {
-    public interface IFarm : IGrainWithGuidKey
+    public interface IProperty : IGrainWithGuidKey
     {
         Task Initialise(string name);
 

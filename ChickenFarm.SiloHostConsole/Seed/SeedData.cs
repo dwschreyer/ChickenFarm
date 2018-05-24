@@ -40,23 +40,23 @@ namespace ChickenFarm.SiloHostConsole.Seed
         {
             var sw = new Stopwatch();
             sw.Start();
-            var farmList = _client.GetGrain<IFarmList>(Guid.Empty);
+            var farmList = _client.GetGrain<IPropertyList>(Guid.Empty);
             var list = await farmList.GetList();
             var startFarmIds = list.Count;
 
             foreach (var farmInfo in _farmData.Farms)
             {
-                var farm = _client.GetGrain<IFarm>(farmInfo.Id);
+                var farm = _client.GetGrain<IProperty>(farmInfo.Id);
                 await farm.Initialise(farmInfo.Name);
-                await farmList.AddFarmId(farmInfo.Id);
+                await farmList.AddPropertyId(farmInfo.Id);
             }
 
             for (int i = 0; i < 1000; i++)
             {
                 var farmId = Guid.NewGuid();
-                var farm = _client.GetGrain<IFarm>(farmId);
+                var farm = _client.GetGrain<IProperty>(farmId);
                 await farm.Initialise($"F {farmId}");
-                await farmList.AddFarmId(farmId);
+                await farmList.AddPropertyId(farmId);
             }
 
             list = await farmList.GetList();

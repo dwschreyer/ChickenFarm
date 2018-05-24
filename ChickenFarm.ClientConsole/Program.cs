@@ -43,13 +43,13 @@ namespace ChickenFarm.ClientConsole
             var rnd = new Random();
             var sw = new Stopwatch();
 
-            var farmList = client.GetGrain<IFarmList>(Guid.Empty);
+            var farmList = client.GetGrain<IPropertyList>(Guid.Empty);
             var farmIds = await farmList.GetList();
 
             foreach (var farmId in farmIds)
             {
                 sw.Restart();
-                var farm = client.GetGrain<IFarm>(farmId);
+                var farm = client.GetGrain<IProperty>(farmId);
                 var name = await farm.GetName();
                 sw.Stop();
                 Console.WriteLine($"{name} in {sw.ElapsedMilliseconds}ms!");
@@ -69,11 +69,11 @@ namespace ChickenFarm.ClientConsole
                         .UseLocalhostClustering()
                         .Configure<ClusterOptions>(options =>
                         {
-                            options.ClusterId = "dev";
+                            options.ClusterId = "orleans-docker";
                             options.ServiceId = "HelloWorldApp";
                         })
-                        .ConfigureApplicationParts(parts => parts.AddApplicationPart(typeof(IFarmList).Assembly).WithReferences())
-                        .ConfigureApplicationParts(parts => parts.AddApplicationPart(typeof(IFarm).Assembly).WithReferences())
+                        .ConfigureApplicationParts(parts => parts.AddApplicationPart(typeof(IPropertyList).Assembly).WithReferences())
+                        .ConfigureApplicationParts(parts => parts.AddApplicationPart(typeof(IProperty).Assembly).WithReferences())
                         .ConfigureApplicationParts(parts => parts.AddApplicationPart(typeof(IChickenHouse).Assembly).WithReferences())
                         .ConfigureApplicationParts(parts => parts.AddApplicationPart(typeof(IChicken).Assembly).WithReferences())
                         .ConfigureLogging(logging => logging.AddConsole())

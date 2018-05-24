@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace ChickenFarm.Grains
 {
-    public class Farm : Grain, IFarm
+    public class Property : Grain, IProperty
     {
         public string Name { get; set; }
 

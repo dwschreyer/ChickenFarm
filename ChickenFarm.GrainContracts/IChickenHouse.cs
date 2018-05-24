@@ -6,6 +6,6 @@ namespace ChickenFarm.GrainContracts
 {
     public interface IChickenHouse : IGrainWithGuidKey
     {
-        Task Initialise(IFarm farm, int size);
+        Task Initialise(IProperty farm, int size);
     }
 }

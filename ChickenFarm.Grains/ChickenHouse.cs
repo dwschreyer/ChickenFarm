@@ -8,7 +8,7 @@ namespace ChickenFarm.Grains
 {
     public class ChickenHouse : Grain, IChickenHouse
     {
-        private IFarm _farm;
+        private IProperty _farm;
 
         public int Size { get; set; }
 
@@ -16,7 +16,7 @@ namespace ChickenFarm.Grains
 
         public List<Guid> ChickenIds { get; set; } = new List<Guid>();
 
-        public Task Initialise(IFarm farm, int size)
+        public Task Initialise(IProperty farm, int size)
         {
             _farm = farm;
             Size = size;

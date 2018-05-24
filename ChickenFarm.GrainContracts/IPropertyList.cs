@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 
 namespace ChickenFarm.GrainContracts
 {
-    public interface IFarmList : IGrainWithGuidKey
+    public interface IPropertyList : IGrainWithGuidKey
     {
         Task Reset();
 
-        Task AddFarmId(Guid farmId);
+        Task AddPropertyId(Guid propertyId);
 
         Task<List<Guid>> GetList();
     }

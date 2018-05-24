@@ -7,24 +7,24 @@ using System.Threading.Tasks;
 
 namespace ChickenFarm.Grains
 {
-    public class FarmList : Grain, IFarmList
+    public class PropertyList : Grain, IPropertyList
     {
-        private List<Guid> _farmListIds = new List<Guid>();
+        private List<Guid> _propertyListIds = new List<Guid>();
 
         public async Task Reset()
         {
-            _farmListIds = new List<Guid>();
+            _propertyListIds = new List<Guid>();
         }
 
-        public Task AddFarmId(Guid farmId)
+        public Task AddPropertyId(Guid propertyId)
         {
-            _farmListIds.Add(farmId);
+            _propertyListIds.Add(propertyId);
             return Task.CompletedTask;
         }
 
         public Task<List<Guid>> GetList()
         {
-            return Task.FromResult(_farmListIds);
+            return Task.FromResult(_propertyListIds);
         }
     }
 }

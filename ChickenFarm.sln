@@ -5,13 +5,27 @@ VisualStudioVersion = 15.0.27428.2043
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ChickenFarm", "ChickenFarm\ChickenFarm.csproj", "{A398FB4B-1BE1-4AAC-928C-EEA22C4B8100}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChickenFarm.SiloHostConsole", "ChickenFarm.SiloHostConsole\ChickenFarm.SiloHostConsole.csproj", "{E1025C74-B248-441D-957E-99C0DCFEAC06}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ChickenFarm.SiloHostConsole", "ChickenFarm.SiloHostConsole\ChickenFarm.SiloHostConsole.csproj", "{E1025C74-B248-441D-957E-99C0DCFEAC06}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChickenFarm.ClientConsole", "ChickenFarm.ClientConsole\ChickenFarm.ClientConsole.csproj", "{5E592FC4-A4A3-4057-805B-E12167FB3D5B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ChickenFarm.ClientConsole", "ChickenFarm.ClientConsole\ChickenFarm.ClientConsole.csproj", "{5E592FC4-A4A3-4057-805B-E12167FB3D5B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChickenFarm.Grains", "ChickenFarm.Grains\ChickenFarm.Grains.csproj", "{B6C9C36E-4D93-4281-9B95-D3514BAC41B5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ChickenFarm.Grains", "ChickenFarm.Grains\ChickenFarm.Grains.csproj", "{B6C9C36E-4D93-4281-9B95-D3514BAC41B5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChickenFarm.GrainContracts", "ChickenFarm.GrainContracts\ChickenFarm.GrainContracts.csproj", "{0122C5DC-C821-4FCA-8AD3-A2639B7C122F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ChickenFarm.GrainContracts", "ChickenFarm.GrainContracts\ChickenFarm.GrainContracts.csproj", "{0122C5DC-C821-4FCA-8AD3-A2639B7C122F}"
+EndProject
+Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{F9E9CEC8-F3E0-4D31-A776-232FCBBB5353}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ChickenFarm.UI.WebPortal", "ChickenFarm.UI.WebPortal\ChickenFarm.UI.WebPortal.csproj", "{44666AF7-E8A9-41E9-8CCB-97F0BD4545CA}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ChickenFarm.Api.PublicApi", "ChickenFarm.Api.PublicApi\ChickenFarm.Api.PublicApi.csproj", "{287AC184-D99A-4C5D-98F8-873DA71B0393}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Web", "Web", "{4205253A-1EC5-442B-8F1B-DD26EB16C6A2}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Silo", "Silo", "{71AF30AB-E99F-4DE3-AB3D-CF602E701FCE}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Contracts", "Contracts", "{36989760-03F7-47C9-B9F2-871CC9B3630A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChickenFarm.Enums", "ChickenFarm.Enums\ChickenFarm.Enums.csproj", "{5B595629-ABB8-402A-9DC0-DDBC66CC3810}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,9 +53,34 @@ Global
 		{0122C5DC-C821-4FCA-8AD3-A2639B7C122F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0122C5DC-C821-4FCA-8AD3-A2639B7C122F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0122C5DC-C821-4FCA-8AD3-A2639B7C122F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F9E9CEC8-F3E0-4D31-A776-232FCBBB5353}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F9E9CEC8-F3E0-4D31-A776-232FCBBB5353}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F9E9CEC8-F3E0-4D31-A776-232FCBBB5353}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F9E9CEC8-F3E0-4D31-A776-232FCBBB5353}.Release|Any CPU.Build.0 = Release|Any CPU
+		{44666AF7-E8A9-41E9-8CCB-97F0BD4545CA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{44666AF7-E8A9-41E9-8CCB-97F0BD4545CA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{44666AF7-E8A9-41E9-8CCB-97F0BD4545CA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{44666AF7-E8A9-41E9-8CCB-97F0BD4545CA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{287AC184-D99A-4C5D-98F8-873DA71B0393}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{287AC184-D99A-4C5D-98F8-873DA71B0393}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{287AC184-D99A-4C5D-98F8-873DA71B0393}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{287AC184-D99A-4C5D-98F8-873DA71B0393}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5B595629-ABB8-402A-9DC0-DDBC66CC3810}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5B595629-ABB8-402A-9DC0-DDBC66CC3810}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5B595629-ABB8-402A-9DC0-DDBC66CC3810}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5B595629-ABB8-402A-9DC0-DDBC66CC3810}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{E1025C74-B248-441D-957E-99C0DCFEAC06} = {71AF30AB-E99F-4DE3-AB3D-CF602E701FCE}
+		{5E592FC4-A4A3-4057-805B-E12167FB3D5B} = {36989760-03F7-47C9-B9F2-871CC9B3630A}
+		{B6C9C36E-4D93-4281-9B95-D3514BAC41B5} = {71AF30AB-E99F-4DE3-AB3D-CF602E701FCE}
+		{0122C5DC-C821-4FCA-8AD3-A2639B7C122F} = {36989760-03F7-47C9-B9F2-871CC9B3630A}
+		{44666AF7-E8A9-41E9-8CCB-97F0BD4545CA} = {4205253A-1EC5-442B-8F1B-DD26EB16C6A2}
+		{287AC184-D99A-4C5D-98F8-873DA71B0393} = {4205253A-1EC5-442B-8F1B-DD26EB16C6A2}
+		{5B595629-ABB8-402A-9DC0-DDBC66CC3810} = {36989760-03F7-47C9-B9F2-871CC9B3630A}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {C748CECD-1D0A-4812-AF16-0FC0476D7B4A}

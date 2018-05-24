@@ -71,12 +71,14 @@ namespace ChickenFarm.SiloHostConsole
                 .AddMemoryGrainStorage("ChickenFarmStorage")
                 .Configure<ClusterOptions>(options =>
                 {
-                    options.ClusterId = "dev";
+                    options.ClusterId = "chicken-farm-docker";
                     options.ServiceId = "ChickenFarmApp";
                 })
                 .Configure<EndpointOptions>(options => options.AdvertisedIPAddress = IPAddress.Loopback)
-                .ConfigureApplicationParts(parts => parts.AddApplicationPart(typeof(Farm).Assembly).WithReferences())
-                .ConfigureLogging(logging => logging.AddConsole())
+                //.ConfigureEndpoints(siloPort: 11111, gatewayPort: 30001)
+                .ConfigureApplicationParts(parts => parts.AddApplicationPart(typeof(Property).Assembly).WithReferences())
+                //.ConfigureLogging(logging => logging.AddConsole())
+                .ConfigureLogging(builder => builder.SetMinimumLevel(LogLevel.Warning).AddConsole())
                 .Build();
 
             return silo;
@@ -91,7 +93,7 @@ namespace ChickenFarm.SiloHostConsole
                     options.ClusterId = "dev";
                     options.ServiceId = "ChickenFarmApp";
                 })
-                .ConfigureApplicationParts(parts => parts.AddApplicationPart(typeof(IFarm).Assembly).WithReferences())
+                .ConfigureApplicationParts(parts => parts.AddApplicationPart(typeof(IProperty).Assembly).WithReferences())
                 .ConfigureLogging(logging => logging.AddConsole())
                 .Build();
 
